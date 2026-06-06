@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Malfolgen-Trainer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="card hero">
+      <div>
+        <p class="eyebrow">Mathe üben</p>
+        <h1>Malfolgen-Trainer</h1>
+        <p class="subtitle">Schnell tippen, direkt Feedback bekommen und Sterne sammeln.</p>
+      </div>
+      <div class="mascot" aria-hidden="true">⭐</div>
+    </section>
+
+    <section class="card settings" aria-labelledby="settings-title">
+      <h2 id="settings-title">Was möchtest du üben?</h2>
+
+      <div class="mode-row" role="group" aria-label="Modus wählen">
+        <button class="mode active" data-mode="practice" type="button">Üben</button>
+        <button class="mode" data-mode="quiz" type="button">Quiz</button>
+      </div>
+
+      <fieldset>
+        <legend>Malreihen auswählen</legend>
+        <div class="tables" id="tables"></div>
+        <div class="quick-actions">
+          <button type="button" id="select-all">Alle</button>
+          <button type="button" id="select-small">1–5</button>
+          <button type="button" id="select-large">6–10</button>
+          <button type="button" id="clear">Leeren</button>
+        </div>
+      </fieldset>
+
+      <div class="options-grid">
+        <label class="toggle">
+          <input id="shuffle" type="checkbox" checked />
+          <span>Zufällige Aufgaben</span>
+        </label>
+        <label class="toggle">
+          <input id="auto-next" type="checkbox" checked />
+          <span>Automatisch weiter</span>
+        </label>
+      </div>
+
+      <button id="start" class="primary start-button" type="button">Los geht’s</button>
+    </section>
+
+    <section class="card game hidden" id="game" aria-live="polite">
+      <div class="topbar">
+        <div>
+          <span class="label">Richtig</span>
+          <strong id="score">0</strong>
+        </div>
+        <div>
+          <span class="label">Serie</span>
+          <strong id="streak">0</strong>
+        </div>
+        <div>
+          <span class="label">Aufgabe</span>
+          <strong><span id="current">1</span>/<span id="total">10</span></strong>
+        </div>
+      </div>
+
+      <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+
+      <div class="question-box">
+        <p class="prompt">Wie viel ist</p>
+        <h2 id="question">3 × 4</h2>
+      </div>
+
+      <form id="answer-form" autocomplete="off">
+        <label for="answer">Deine Antwort</label>
+        <div class="answer-line">
+          <input id="answer" inputmode="numeric" pattern="[0-9]*" type="text" placeholder="?" aria-describedby="feedback" />
+          <button class="primary check-button" type="submit">OK</button>
+        </div>
+      </form>
+
+      <div class="keypad" aria-label="Zahlenfeld">
+        <button type="button" data-key="1">1</button>
+        <button type="button" data-key="2">2</button>
+        <button type="button" data-key="3">3</button>
+        <button type="button" data-key="4">4</button>
+        <button type="button" data-key="5">5</button>
+        <button type="button" data-key="6">6</button>
+        <button type="button" data-key="7">7</button>
+        <button type="button" data-key="8">8</button>
+        <button type="button" data-key="9">9</button>
+        <button type="button" data-key="clear">⌫</button>
+        <button type="button" data-key="0">0</button>
+        <button type="button" data-key="enter" class="key-enter">OK</button>
+      </div>
+
+      <p id="feedback" class="feedback"></p>
+
+      <div class="button-row">
+        <button id="hint" type="button">Tipp</button>
+        <button id="next" type="button" class="hidden">Weiter</button>
+        <button id="stop" type="button">Beenden</button>
+      </div>
+    </section>
+
+    <section class="card result hidden" id="result">
+      <h2>Geschafft!</h2>
+      <p id="result-text"></p>
+      <div class="stars" id="stars" aria-hidden="true"></div>
+      <div class="button-row centered">
+        <button id="again" class="primary" type="button">Gleiche Runde nochmal</button>
+        <button id="change" type="button">Andere Reihen wählen</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
