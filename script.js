@@ -108,7 +108,6 @@ function showTask() {
   answerEl.disabled = false;
   nextBtn.classList.add('hidden');
   updateProgress();
-  answerEl.focus({ preventScroll: true });
 }
 
 function updateStats() {
@@ -225,13 +224,11 @@ function pressKey(key) {
 
   if (key === 'clear') {
     answerEl.value = answerEl.value.slice(0, -1);
-    answerEl.focus({ preventScroll: true });
     return;
   }
 
   if (/^\d$/.test(key) && answerEl.value.length < 3) {
     answerEl.value += key;
-    answerEl.focus({ preventScroll: true });
   }
 }
 
@@ -270,9 +267,20 @@ keypadEl.addEventListener('click', event => {
 });
 
 answerEl.addEventListener('input', () => {
-  // Echte Tastatureingaben sollen vom Browser selbst verarbeitet werden.
-  // Wir bereinigen nur den Inhalt, damit keine Buchstaben oder zu lange Zahlen entstehen.
+  // Fallback, falls ein Browser trotz readonly einen Eingabewert verändert.
   answerEl.value = answerEl.value.replace(/\D/g, '').slice(0, 3);
+});
+
+answerEl.addEventListener('pointerdown', event => {
+  event.preventDefault();
+});
+
+answerEl.addEventListener('touchstart', event => {
+  event.preventDefault();
+}, { passive: false });
+
+answerEl.addEventListener('focus', () => {
+  answerEl.blur();
 });
 
 document.addEventListener('keydown', event => {

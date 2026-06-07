@@ -74,9 +74,9 @@
       </div>
 
       <form id="answer-form" autocomplete="off">
-        <label for="answer">Deine Antwort</label>
+        <span id="answer-label" class="answer-label">Deine Antwort</span>
         <div class="answer-line">
-          <input id="answer" inputmode="numeric" pattern="[0-9]*" type="text" placeholder="?" aria-describedby="feedback" />
+          <input id="answer" inputmode="none" pattern="[0-9]*" type="text" placeholder="?" aria-labelledby="answer-label" aria-describedby="feedback" readonly aria-readonly="true" tabindex="-1" />
           <button class="primary check-button" type="submit">OK</button>
         </div>
       </form>
